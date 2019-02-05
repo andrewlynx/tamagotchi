@@ -1,0 +1,1 @@
+Test task: Simple tamagotchi-like game on Laravel
