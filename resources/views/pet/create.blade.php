@@ -1,5 +1,5 @@
 <div class='col-md-3'>
-    <a href="#">
+    <a href="pet/create/{{strtolower($name)}}">
         <img src="img/{{strtolower($name)}}.jpg">
     </a>
 </div>

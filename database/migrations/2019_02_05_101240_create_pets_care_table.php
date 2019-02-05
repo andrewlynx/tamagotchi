@@ -16,6 +16,7 @@ class CreatePetsCareTable extends Migration
         Schema::create('pets_care', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('pet_id');
+            $table->integer('value')->default(100);
             $table->timestamps();
             
             $table->foreign('pet_id')->references('id')->on('pets')->onDelete('cascade');

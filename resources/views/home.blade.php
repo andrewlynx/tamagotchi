@@ -13,14 +13,27 @@
                             {{ session('status') }}
                         </div>
                     @endif
+                    @if (Session::has('message'))
+                        <div class="alert alert-info">
+                            {{ Session::get('message') }}
+                        </div>
+                    @endif
 
                     @if (count($pets) == 0)
                         <h2>Create your first pet!</h2>
                     @endif
                     
+                    @foreach ($pets as $pet)
+                        <div class="row">
+                            @include('pet.thumb', $pet)
+                        </div>
+                    @endforeach
+                    
                     <div class="row">
                         @foreach (\App\Pet::NAMES as $name)
-                            @include('pet.create')
+                            @if (count($pets->where('name', $name)) == 0)
+                                @include('pet.create')
+                            @endif
                         @endforeach
                     </div>
 
