@@ -11,7 +11,7 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use App\Pet;
 
-class PetPropertyUpdate
+class PetPropertyUpdate implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
     

@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Events\PetPropertyUpdate;
+use App\Events\PetPropertyUpdate as PetPropertyUpdateEvent;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
@@ -24,7 +24,7 @@ class PetPropertyUpdate
      * @param  PetPropertyUpdate  $event
      * @return void
      */
-    public function handle(PetPropertyUpdate $event)
+    public function handle(PetPropertyUpdateEvent $event)
     {
         //
     }

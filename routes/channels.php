@@ -1,6 +1,7 @@
 <?php
 
 use App\Broadcasting\PetChannel;
+use App\Pet;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,4 +18,8 @@ Broadcast::channel('App.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
 
-Broadcast::channel('pet.{pet}', PetChannel::class);
+Broadcast::channel('pet.{petId}', function ($user, $petId) {
+    return $user->id === Pet::find($petId)->user_id;
+}); 
+
+Broadcast::channel('pet.{petId}', PetChannel::class);

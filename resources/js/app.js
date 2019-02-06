@@ -32,7 +32,7 @@ const app = new Vue({
     el: '#app'
 });
 
-Echo.private('pet.${pet}')
-    .listen('PetPropertyUpdate', (e) => {
+Echo.channel('private-pet')
+    .listen('\App\Events\PetPropertyUpdate', (e) => {
         console.log(e);
     });
