@@ -26,6 +26,11 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+        $schedule->call(function () {
+            \App\Pet::all()->each( function ($pet, $key) {
+                $pet->decreaseProps();
+            });
+        })->everyMinute();
     }
 
     /**

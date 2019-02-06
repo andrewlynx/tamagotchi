@@ -46,4 +46,11 @@ class Pet extends Model
             $pet->user_id = Auth::user()->id;
         });
     }
+    
+    public function decreaseProps()
+    {
+        $this->petCare->decrease();
+        $this->petHunger->decrease();
+        $this->petSleeping->decrease();
+    }
 }
