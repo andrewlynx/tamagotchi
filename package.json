@@ -30,7 +30,10 @@
   "directories": {
     "test": "tests"
   },
-  "dependencies": {},
+  "dependencies": {
+    "laravel-echo": "^1.5.2",
+    "pusher-js": "^4.3.1"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC"

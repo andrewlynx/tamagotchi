@@ -31,3 +31,8 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#app'
 });
+
+Echo.private('pet.${pet}')
+    .listen('PetPropertyUpdate', (e) => {
+        console.log(e);
+    });
