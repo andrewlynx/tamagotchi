@@ -16,3 +16,7 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/care/{name}', 'PetController@care');
+Route::get('/hunger/{name}', 'PetController@feed');
+Route::get('/sleeping/{name}', 'PetController@sleep');

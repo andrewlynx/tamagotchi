@@ -32,10 +32,51 @@ const app = new Vue({
     el: '#app',
     data: {
         pets: pets
+    },
+    methods: {
+        care (id) {
+            this.update(id, 'care');
+        },
+        feed (id) {
+            this.update(id, 'hunger');
+        },
+        sleep (id) {
+            this.update(id, 'sleeping');
+        },
+        update (id, property) {
+            axios.get('/api/' + property + '/' + id)
+                .then(function (response) {
+                    if (response.statusText == 'OK') {
+                        let i;
+                        app.pets.map(function (pet, index) {
+                            if (pet.id == id) {
+                                i = index;
+                            }
+                        });
+                        let petProperty = 'pet_' + property;
+                        app.pets[i][petProperty].value = 100;
+                    }
+                })
+        },
+        makeClass (value) {
+            if (value > 50) {
+                return 'green';
+            }
+            if (value > 25) {
+                return 'yellow';
+            }
+            return 'red';
+        }
     }
 });
-console.log(app.pets);
+
 Echo.channel("pet")
     .listen('.property', (e) => {
-        console.log(e);
+        app.pets.map(function (pet, index) {
+            if (typeof e.pets[pet.id] !== 'undefined') {
+                app.pets[index].pet_care.value = e.pets[pet.id].pet_care;
+                app.pets[index].pet_hunger.value = e.pets[pet.id].pet_hunger;
+                app.pets[index].pet_sleeping.value = e.pets[pet.id].pet_sleeping;
+            }
+        });
     });

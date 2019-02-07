@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Session;
 
 class PetController extends Controller
 {
-    public function create($name)
+    public function create(string $name)
     {
         if (in_array(ucfirst($name), Pet::NAMES)) {
             if (!Pet::where('name', ucfirst($name))->where('user_id', Auth::user()->id)->exists()) {
@@ -27,5 +27,20 @@ class PetController extends Controller
             Session::flash('message', "You can't create $name, stop cheating!!" );
         }
         return redirect('/');
+    }
+
+    public function care(int $id)
+    {
+        Pet::find($id)->petCare->increase();
+    }
+
+    public function feed(int $id)
+    {
+        Pet::find($id)->petHunger->increase();
+    }
+
+    public function sleep(int $id)
+    {
+        Pet::find($id)->petSleeping->increase();
     }
 }

@@ -12,16 +12,16 @@ class PetProperty extends Model
     ];
 
     protected $max = 100;
-    protected $decreaseValue = 1;
+    protected $decreaseValue = 20;
 
     public function pet()
     {
         return $this->belongsTo('App\Pet');
     }
 
-    protected function increase()
+    public function increase()
     {
-        return $this->update(['value', $this->max]);
+        return $this->update(['value' => $this->max]);
     }
 
     public function decrease() : bool
