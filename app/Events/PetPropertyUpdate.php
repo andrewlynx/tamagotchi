@@ -15,16 +15,21 @@ class PetPropertyUpdate implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
     
-    public $pet;
+    public $pets;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Pet $pet)
+    public function __construct(array $pets)
     {
-        $this->pet = $pet;
+        foreach ($pets as $pet) {
+            $data['care'] = $pet->petCare->value;
+            $data['hunger'] = $pet->petHunger->value;
+            $data['sleeping'] = $pet->petSleeping->value;
+            $this->pets[$pet->id] = $data;
+        }
     }
 
     /**
@@ -34,6 +39,10 @@ class PetPropertyUpdate implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('pet.' . $this->pet->id);
+        return new Channel('pet');
+    }
+    
+    public function broadcastAs() {
+        return 'property';
     }
 }

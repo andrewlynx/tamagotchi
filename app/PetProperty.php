@@ -24,12 +24,14 @@ class PetProperty extends Model
         return $this->update(['value', $this->max]);
     }
 
-    public function decrease()
+    public function decrease() : bool
     {
+        $decreased = false;
         if ($this->updated_at <= Carbon::now()->subMinutes($this->interval)->toDateTimeString()) {
             $this->value -= $this->decreaseValue;
             $this->save();
+            $decreased = true;
         }
-        return $this;
+        return $decreased;
     }
 }

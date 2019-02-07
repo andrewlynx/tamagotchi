@@ -4,7 +4,6 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
-use App\Events\PetPropertyUpdate;
 
 class Pet extends Model
 {
@@ -50,10 +49,10 @@ class Pet extends Model
     
     public function decreaseProps()
     {
-        $this->petCare->decrease();
-        $this->petHunger->decrease();
-        $this->petSleeping->decrease();
-
-        event(new PetPropertyUpdate($this));
+        return (
+            $this->petCare->decrease() ||
+            $this->petHunger->decrease() ||
+            $this->petSleeping->decrease()
+        );
     }
 }

@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class PetCare extends PetProperty
 {
     protected $table = 'pets_care';
-    protected $interval = 1; // 15
+    protected $interval = 4; // 15
 }

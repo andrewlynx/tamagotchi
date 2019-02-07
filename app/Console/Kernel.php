@@ -4,6 +4,8 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Events\PetPropertyUpdate;
+use App\Pet;
 
 class Kernel extends ConsoleKernel
 {
@@ -27,9 +29,15 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
         $schedule->call(function () {
-            \App\Pet::all()->each( function ($pet, $key) {
-                $pet->decreaseProps();
+            $processed = [];
+            Pet::all()->each( function ($pet, $key) use (&$processed) {
+                if ($pet->decreaseProps()) {
+                    $processed[] = $pet;
+                }
             });
+            if (!empty($processed)) {
+                event(new PetPropertyUpdate($processed));
+            }
         })->everyMinute();
     }
 
