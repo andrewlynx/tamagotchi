@@ -12,8 +12,8 @@ use Illuminate\Support\Facades\Session;
 
 class PetController extends Controller
 {
-    public function create($name) {
-        
+    public function create($name)
+    {
         if (in_array(ucfirst($name), Pet::NAMES)) {
             if (!Pet::where('name', ucfirst($name))->where('user_id', Auth::user()->id)->exists()) {
                 $pet = Pet::create(['name' => ucfirst($name)]);

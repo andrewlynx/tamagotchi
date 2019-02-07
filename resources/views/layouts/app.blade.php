@@ -10,6 +10,13 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
+    <script>
+        @guest
+            var pets = [];
+        @else
+            var pets = {!! json_encode($pets->toArray()) !!};
+        @endguest
+    </script>
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->

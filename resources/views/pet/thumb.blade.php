@@ -1,10 +1,8 @@
 <div class='col-md-3'>
-    <a href="pet/{{$pet->id}}">
-        <img src="img/{{strtolower($name)}}.jpg">
-    </a>
+    <img :src="'/img/' + pet.name.toLowerCase() + '.jpg'">
 </div>
 <div class='col-md-3'>
-    <p>Care: {{$pet->petCare->value}}</p>
-    <p>Hunger: {{$pet->petHunger->value}}</p>
-    <p>Sleepy: {{$pet->petSleeping->value}}</p>
+    <p>Care: @{{pet.pet_care.value}}</p>
+    <p>Hunger: @{{pet.pet_hunger.value}}</p>
+    <p>Sleepy: @{{pet.pet_sleeping.value}}</p>
 </div>

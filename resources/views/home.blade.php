@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -23,11 +24,9 @@
                         <h2>Create your first pet!</h2>
                     @endif
                     
-                    @foreach ($pets as $pet)
-                        <div class="row">
-                            @include('pet.thumb', $pet)
-                        </div>
-                    @endforeach
+                    <div class="row" v-for="pet in pets">
+                        @include('pet.thumb')
+                    </div>
                     
                     <div class="row">
                         @foreach (\App\Pet::NAMES as $name)

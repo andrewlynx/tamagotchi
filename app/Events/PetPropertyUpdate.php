@@ -25,9 +25,9 @@ class PetPropertyUpdate implements ShouldBroadcast
     public function __construct(array $pets)
     {
         foreach ($pets as $pet) {
-            $data['care'] = $pet->petCare->value;
-            $data['hunger'] = $pet->petHunger->value;
-            $data['sleeping'] = $pet->petSleeping->value;
+            $data['petCare'] = $pet->petCare->value;
+            $data['petHunger'] = $pet->petHunger->value;
+            $data['petSleeping'] = $pet->petSleeping->value;
             $this->pets[$pet->id] = $data;
         }
     }

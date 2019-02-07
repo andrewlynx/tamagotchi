@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
+use App\Pet;
 
 class HomeController extends Controller
 {
@@ -25,7 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $pets = Auth::user()->pet;
+        $pets = Pet::with('petCare', 'PetHunger', 'petSleeping')->where('user_id', Auth::user()->id)->get();
         return view('home', compact(['pets']));
     }
 }
