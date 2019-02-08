@@ -17,6 +17,12 @@ class PetController extends Controller
         $this->middleware(['auth']);
     }
 
+    /**
+     * Create new pet for user with selected name. 
+     * Prevent creating dublicates and non-valid pets
+     * 
+     * @return redirection to main screen
+     */
     public function create(string $name)
     {
         if (in_array(ucfirst($name), Pet::NAMES)) {
@@ -34,21 +40,41 @@ class PetController extends Controller
         return redirect('/');
     }
 
+    /**
+     * Increase pet care value
+     * 
+     * @return void
+     */
     public function care(int $id)
     {
         Pet::find($id)->petCare->increase();
     }
 
+    /**
+     * Increase pet hunger value
+     * 
+     * @return void
+     */
     public function feed(int $id)
     {
         Pet::find($id)->petHunger->increase();
     }
 
+    /**
+     * Increase pet sleeping value
+     * 
+     * @return void
+     */
     public function sleep(int $id)
     {
         Pet::find($id)->petSleeping->increase();
     }
 
+    /**
+     * Delete all current user pets
+     * 
+     * @return void
+     */
     public function restart()
     {
         Pet::where('user_id', Auth::id())->delete();

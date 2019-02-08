@@ -28,7 +28,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-    
+
+    /**
+     * defines relations with model Pet
+     * 
+     * @return \App\User
+     */
     public function pet()
     {
         return $this->hasMany('App\Pet');

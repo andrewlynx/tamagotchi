@@ -42,6 +42,11 @@ class PetPropertyUpdate implements ShouldBroadcast
         return new Channel('pet');
     }
     
+    /**
+     * Get the channel name.
+     *
+     * @return string
+     */
     public function broadcastAs() {
         return 'property';
     }

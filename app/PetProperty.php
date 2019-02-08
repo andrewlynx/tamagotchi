@@ -11,19 +11,43 @@ class PetProperty extends Model
         'value',
     ];
 
+    /**
+     * Max property value
+     * @var type
+     */
     protected $max = 100;
-    protected $decreaseValue = 5;
 
+    /**
+     * Default decreasing value
+     * @var type
+     */
+    protected $decreaseValue = 1;
+
+    /**
+     * defines relations with model Pet
+     * 
+     * @return \App\PetProperty
+     */
     public function pet()
     {
         return $this->belongsTo('App\Pet');
     }
 
+    /**
+     * Set property to its max value
+     * 
+     * @return \App\PetProperty
+     */
     public function increase()
     {
         return $this->update(['value' => $this->max]);
     }
 
+    /**
+     * Calculate decreasing interval with special conditions
+     * 
+     * @return int
+     */
     public function interval(): int
     {
         $interval = $this->interval;
@@ -35,6 +59,11 @@ class PetProperty extends Model
         return $interval;
     }
 
+    /**
+     * Decrease value if it meets interval requirements
+     * 
+     * @return bool
+     */
     public function decrease(): bool
     {
         $decreased = false;

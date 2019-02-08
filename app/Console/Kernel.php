@@ -26,8 +26,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        // Decrease pet properties if they meet requirements.
+        // If any of prorerties is changed, trigger Pusher event
         $schedule->call(function () {
             $processed = [];
             Pet::all()->each( function ($pet, $key) use (&$processed) {
