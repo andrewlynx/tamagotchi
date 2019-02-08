@@ -17,6 +17,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/care/{name}', 'PetController@care');
-Route::get('/hunger/{name}', 'PetController@feed');
-Route::get('/sleeping/{name}', 'PetController@sleep');
+Route::middleware('auth:api')->post('/care/{name}', 'PetController@care');
+Route::middleware('auth:api')->post('/hunger/{name}', 'PetController@feed');
+Route::middleware('auth:api')->post('/sleeping/{name}', 'PetController@sleep');
+Route::middleware('auth:api')->post('/restart', 'PetController@restart');

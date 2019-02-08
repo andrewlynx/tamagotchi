@@ -12,7 +12,7 @@ class PetProperty extends Model
     ];
 
     protected $max = 100;
-    protected $decreaseValue = 20;
+    protected $decreaseValue = 5;
 
     public function pet()
     {
@@ -24,10 +24,23 @@ class PetProperty extends Model
         return $this->update(['value' => $this->max]);
     }
 
-    public function decrease() : bool
+    public function interval(): int
+    {
+        $interval = $this->interval;
+        if ($this instanceof PetCare) {
+            if (PetSleeping::where('pet_id', $this->pet_id)->first()->value < 5) {
+                $interval = $interval / 5;
+            }
+        }
+        return $interval;
+    }
+
+    public function decrease(): bool
     {
         $decreased = false;
-        if ($this->updated_at <= Carbon::now()->subMinutes($this->interval)->toDateTimeString()) {
+        if ($this->value > 0 &&
+            $this->updated_at <= Carbon::now()->subMinutes($this->interval())->toDateTimeString()
+        ) {
             $this->value -= $this->decreaseValue;
             $this->save();
             $decreased = true;

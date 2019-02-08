@@ -43,7 +43,7 @@ class Pet extends Model
         parent::boot();
 
         static::creating(function ($pet) {
-            $pet->user_id = Auth::user()->id;
+            $pet->user_id = Auth::id();
         });
     }
     

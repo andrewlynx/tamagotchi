@@ -8,6 +8,14 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+@mixin transform($transforms) {
+    -moz-transform: $transforms;
+    -o-transform: $transforms;
+    -ms-transform: $transforms;
+    -webkit-transform: $transforms;
+    transform: $transforms;
+}
+
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
@@ -32,5 +40,33 @@ img {
         &.red {
             background-color: rgba(255, 128, 128, 0.5);
         }
+    }
+}
+.dead-frame {
+    position: relative;
+    border: 5px solid black;
+    &:after {
+        display: block;
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 2;
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+}
+.restart {
+    position: fixed;
+    z-index: 900;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    .vertical-center {
+        margin: auto;
     }
 }

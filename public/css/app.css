@@ -10521,3 +10521,35 @@ img {
   background-color: rgba(255, 128, 128, 0.5);
 }
 
+.dead-frame {
+  position: relative;
+  border: 5px solid black;
+}
+
+.dead-frame:after {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.restart {
+  position: fixed;
+  z-index: 900;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.7);
+  display: flex;
+}
+
+.restart .vertical-center {
+  margin: auto;
+}
+

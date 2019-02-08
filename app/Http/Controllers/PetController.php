@@ -12,10 +12,15 @@ use Illuminate\Support\Facades\Session;
 
 class PetController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth']);
+    }
+
     public function create(string $name)
     {
         if (in_array(ucfirst($name), Pet::NAMES)) {
-            if (!Pet::where('name', ucfirst($name))->where('user_id', Auth::user()->id)->exists()) {
+            if (!Pet::where('name', ucfirst($name))->where('user_id', Auth::id())->exists()) {
                 $pet = Pet::create(['name' => ucfirst($name)]);
                 $pet->petCare()->save(new PetCare());
                 $pet->petHunger()->save(new PetHunger());
@@ -42,5 +47,10 @@ class PetController extends Controller
     public function sleep(int $id)
     {
         Pet::find($id)->petSleeping->increase();
+    }
+
+    public function restart()
+    {
+        Pet::where('user_id', Auth::id())->delete();
     }
 }

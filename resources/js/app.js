@@ -20,7 +20,9 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-//Vue.component('pets-component', require('./components/Pets.vue').default);
+Vue.component('passport-clients', require('./components/passport/Clients.vue').default);
+Vue.component('passport-authorized-clients', require('./components/passport/AuthorizedClients.vue').default);
+Vue.component('passport-personal-access-tokens', require('./components/passport/PersonalAccessTokens.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -31,7 +33,9 @@ window.Vue = require('vue');
 const app = new Vue({
     el: '#app',
     data: {
-        pets: pets
+        pets: pets,
+        newPetsToggle: false,
+        deadPets: false
     },
     methods: {
         care (id) {
@@ -44,7 +48,7 @@ const app = new Vue({
             this.update(id, 'sleeping');
         },
         update (id, property) {
-            axios.get('/api/' + property + '/' + id)
+            axios.post('/api/' + property + '/' + id)
                 .then(function (response) {
                     if (response.statusText == 'OK') {
                         let i;
@@ -66,6 +70,20 @@ const app = new Vue({
                 return 'yellow';
             }
             return 'red';
+        },
+        deadFrame (value) {
+            if (value <= 0) {
+               this.deadPets = true;
+               return 'dead-frame';
+            }
+        },
+        restart () {
+            axios.post('/api/restart')
+                .then(function (response) {
+                    if (response.statusText == 'OK') {
+                        location.reload();
+                    }
+            });
         }
     }
 });
