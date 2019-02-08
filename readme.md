@@ -8,7 +8,8 @@
 4. Copy .env file and set MySQL and Pusher creds
 5. Run db migration
 6. Generate app key
-7. For correct pet lifecycle you need to add cron task:
+7. Generate passport key (php artisan passport:keys)
+8. For correct pet lifecycle you need to add cron task:
 
 `* * * * * php /var/www/tamagotchi/artisan schedule:run >> /dev/null 2>&1`
 
