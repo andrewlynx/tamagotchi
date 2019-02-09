@@ -81,10 +81,9 @@ class Pet extends Model
      */
     public function decreaseProps()
     {
-        return (
-            $this->petCare->decrease() ||
-            $this->petHunger->decrease() ||
-            $this->petSleeping->decrease()
-        );
+        $care = $this->petCare->decrease();
+        $hunger = $this->petHunger->decrease();
+        $sleep = $this->petSleeping->decrease();
+        return ($care || $hunger || $sleep);
     }
 }
